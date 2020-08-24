@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
-
+//import Desert from './Desert';
+import { Button, Tooltip } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 const App= ()=>{
 
   const API_ID='d7ebcb1b';
   const API_KEY  ='b4008730c320bf21302872d39cad8da8';
   const [Desserts, setDesserts] =useState([]);
-  
+  const [rDesert, setrDesert] =useState([]);
+
   var NbrandomDesert;
   var randomDesert;
   useEffect(()=>{
@@ -27,20 +30,28 @@ const App= ()=>{
     randomDesert=alldesert[NbrandomDesert];
     if(randomDesert){
       console.log(randomDesert.recipe.label);
+      setrDesert(randomDesert.recipe.label);
+      console.log(rDesert);
+
+
     }
    
   }
-   //getRandomDessert();
-
       return (
         <div className="App">
-          <button onClick={getRandomDessert}>
-      Generate Dessert
-        </button>
 
-        <ul>
-      {randomDesert? randomDesert.recipe.label: "loading"}
-        </ul>
+          <div></div>
+          <button className="btn-f" onClick={getRandomDessert}> Go! </button>
+        <span className="text">
+        {rDesert?  rDesert: "loading"}
+        </span>
+
+        <br />
+
+        <Tooltip title="search">
+      <Button shape="circle" icon={<SearchOutlined />} />
+    </Tooltip>
+       
         </div>
       );
     
