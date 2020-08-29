@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
-//import Desert from './Desert';
-import { Button, Tooltip } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import bakery from './bakery.png'; 
 
 const App= ()=>{
 
@@ -29,8 +27,10 @@ const App= ()=>{
     console.log(NbrandomDesert);
     randomDesert=alldesert[NbrandomDesert];
     if(randomDesert){
+      console.log(randomDesert.recipe);
+
       console.log(randomDesert.recipe.label);
-      setrDesert(randomDesert.recipe.label);
+      setrDesert(randomDesert.recipe);
       console.log(rDesert);
 
 
@@ -40,19 +40,34 @@ const App= ()=>{
       return (
         <div className="App">
 
-          <div></div>
-          <button className="btn-f" onClick={getRandomDessert}> Go! </button>
-        <span className="text">
-        {rDesert?  rDesert: "loading"}
-        </span>
-
-        <br />
-
-        <Tooltip title="search">
-      <Button shape="circle" icon={<SearchOutlined />} />
-    </Tooltip>
-       
-        </div>
+          <div className="container">
+            <div className="row">
+            <span className="text">
+            {rDesert.label?  rDesert.label: "Click me for a random Desert!"}
+            </span>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div className="row">
+            <div className="button_cont" align="center"> 
+          <a className="desert-btn"  onClick={getRandomDessert}  >
+          <img src={bakery} alt="bakery" height="60" width="60" /></a>
+          </div>
+          <br/>
+            <br/>
+            </div>
+            <div className="row">
+            <span className="textd">
+            {rDesert.ingredientLines?  rDesert.ingredientLines.map((ingrediant)=>
+            <div key={ingrediant}>{ingrediant}</div>): " "}
+            </span>
+            </div>
+          </div>
+    
+     
+      
+      
       );
     
  
